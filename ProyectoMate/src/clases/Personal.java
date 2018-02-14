@@ -12,15 +12,16 @@ package clases;
 class Personal {
     private String id;
     private String nombre;
+    private String dni;
     private String apellido;
     private String cargo;
-    private String Apellido;
+   
 
     public Personal(String id, String nombre, String apellido, String Apellido) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.Apellido = Apellido;
+        
     }
 
     public String getId() {
@@ -53,6 +54,14 @@ class Personal {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
   
