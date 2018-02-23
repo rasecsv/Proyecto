@@ -16,16 +16,22 @@ public class Personal {
 	private int dni;
 	private String ruc;
         private String cargo;
+        private int idArea;
 	private boolean permisosAdmin; //true si es admin
 	
+        public Personal(){
+            
+        }
 	
-        public void Personal(String nombre , String apellidos , int dni, String ruc,String cargo,boolean permisosadmin){
+        public void Personal(String nombre , String apellidos , int dni, String ruc,String cargo,int idarea,boolean permisosadmin){
             this.setNombre(nombre);
             this.setApellidos(apellidos);
             this.setDni(dni);
             this.setRuc(ruc);
             this.setCargo(cargo);
+            this.setIdArea(idArea);
             this.setPermisosAdmin(permisosadmin);
+            
         }
 	//Setter y getter para el id
 	
@@ -142,5 +148,23 @@ public class Personal {
      */
     public void setPermisosAdmin(boolean permisosAdmin) {
         this.permisosAdmin = permisosAdmin;
+    }
+
+    /**
+     * @return the idArea
+     */
+    public int getIdArea() {
+        return idArea;
+    }
+
+    /**
+     * @param idArea the idArea to set
+     */
+    public void setIdArea(int idArea) {
+        this.idArea = idArea;
+    }
+
+    public void setText(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

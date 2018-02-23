@@ -23,28 +23,29 @@ public class AgregarPersonal {
      
            
     public boolean registrar(Personal persona){
-        sSQL = "insert into bdproyectomate.persona(nombre,apellido,dni,ruc,cargo)"+ "values(?,?,?,?,?)";
-        sSQL2 = "insert into bdproyectomate.area(idPersona,nombre)";
+        sSQL = "INSERT into bdproyectomate.persona(nombre,apellido,dni,ruc,cargo) VALUES (?,?,?,?,?)";
+      //  sSQL2 = "SELECT * FROM bdproyectomate.area";
         try{
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            PreparedStatement pst2 = cn.prepareStatement(sSQL2);
-            
+          // PreparedStatement pst2 = cn.prepareStatement(sSQL2);
+            Area area = new Area();
+            int cont=0;
             pst.setString(1, persona.getNombre());
-            pst.setString(2, persona.getApellidos());
-            pst.setInt(3, persona.getDNI());
-            pst.setString(4, persona.getRuc());
+            pst.setString(7, persona.getApellidos());
+            pst.setInt(2, persona.getDNI());
+            pst.setString(3, persona.getRuc());
             pst.setString(5, persona.getCargo());
             
-              int n = pst.executeUpdate();
+            if((persona.getCargo()).equals("Administrador")){
+                pst.setBoolean(6, true);
+            }else{
+                pst.setBoolean(6, false);
+            }
             
-            if (n != 0) {
-                int n2 = pst2.executeUpdate();
-                if (n2 != 0) {
-                 return true;
-                } else {
-                    return false;
-                }
-            } else {
+          pst.setInt(4, persona.getIdArea());
+            int n = pst.executeUpdate();
+            
+            if (n == 0) {
                 return false;
             }
           
@@ -52,5 +53,6 @@ public class AgregarPersonal {
             JOptionPane.showConfirmDialog(null, e);
           return false;
         }
+         return false;
     }
 }

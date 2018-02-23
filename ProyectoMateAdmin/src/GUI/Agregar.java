@@ -1,16 +1,46 @@
 package GUI;
 
+import BaseDatos.ConectorBD;
 import Clases.AgregarPersonal;
+import Clases.Area;
 import Clases.Personal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class Agregar extends javax.swing.JFrame {
-    private String accion = "agregar";
+    private final String accion = "agregar";
+    private DefaultComboBoxModel modelocombo;
+    ConectorBD mysql = new ConectorBD();
+     Connection cn= mysql.Conectar();
+     
     public Agregar() {
+        modelocombo = new DefaultComboBoxModel(new String[]{});
         initComponents();
+        llenarCombo();
     }
 
-    
+    public void llenarCombo(){
+       Area area =new Area();
+       String nombre= null;
+        try {
+            String sql="SELECT * FROM bdproyectomate.area";
+            PreparedStatement verArea = cn.prepareStatement(sql);
+            ResultSet ver = verArea.executeQuery();
+            modelocombo = new DefaultComboBoxModel();
+            CombArea.setModel(modelocombo);
+            while(ver.next()){
+                modelocombo.addElement(ver.getString(2));
+                
+            }
+            
+        } catch (SQLException e) {
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,8 +57,8 @@ public class Agregar extends javax.swing.JFrame {
         txtDNI = new javax.swing.JTextField();
         txtRUC = new javax.swing.JTextField();
         txtCargo = new javax.swing.JTextField();
-        txtArea = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
+        CombArea = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,23 +104,23 @@ public class Agregar extends javax.swing.JFrame {
             }
         });
 
-        txtArea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAreaActionPerformed(evt);
-            }
-        });
-
-        btnAgregar.setText("Agregar");
+        btnAgregar.setText("Guardar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
 
+        CombArea.setModel(modelocombo);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(242, Short.MAX_VALUE)
+                .addComponent(btnAgregar)
+                .addGap(87, 87, 87))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,17 +132,13 @@ public class Agregar extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtRUC)
+                    .addComponent(txtRUC, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(txtCargo)
-                    .addComponent(txtArea, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(txtApellido)
                     .addComponent(txtNombre)
-                    .addComponent(txtDNI))
+                    .addComponent(txtDNI)
+                    .addComponent(CombArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(214, Short.MAX_VALUE)
-                .addComponent(btnAgregar)
-                .addGap(115, 115, 115))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,13 +164,13 @@ public class Agregar extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                    .addComponent(CombArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(btnAgregar)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,24 +211,22 @@ public class Agregar extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtCargo.requestFocus();
     }//GEN-LAST:event_txtCargoActionPerformed
-
-    private void txtAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAreaActionPerformed
-        // TODO add your handling code here:
-        txtArea.requestFocus();
-    }//GEN-LAST:event_txtAreaActionPerformed
-
+    
+    
+    
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         Personal persona =new Personal();
         AgregarPersonal agregar = new AgregarPersonal();
-        
+        Area nuevo = (Area) CombArea.getSelectedItem();
+        int id = nuevo.getID();
         persona.setNombre(txtNombre.getText());
         persona.setApellidos(txtApellido.getText());
         persona.setDni(Integer.parseInt(txtDNI.getText()));
         persona.setRuc(txtRUC.getText());
         persona.setCargo(txtCargo.getText());
-        
-         if (accion.equals("guardar")) {
+        persona.setIdArea(id);
+        if (accion.equals("guardar")) {
              if (agregar.registrar(persona)){
                  JOptionPane.showMessageDialog(rootPane, "El cliente fue registrado correctamente");
                  
@@ -224,9 +248,11 @@ public class Agregar extends javax.swing.JFrame {
                 new Agregar().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox CombArea;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -236,7 +262,6 @@ public class Agregar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtArea;
     private javax.swing.JTextField txtCargo;
     private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtNombre;

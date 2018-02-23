@@ -5,9 +5,18 @@ import java.util.Date;
 public class Area {
       private int ID;
     private String Nombre;
-    private Date HoraIn;
-    private Date HoraOut;
+    private String HoraIn;
+    private String HoraOut;
+    
+    public  Area(){
+        
+    }
 
+    public Area(String nombre , String horaIn, String horaOut){
+        this.Nombre = nombre;
+        this.HoraIn =horaIn;
+        this.HoraOut = horaOut;
+    }
     /**
      * @return the ID
      */
@@ -39,28 +48,56 @@ public class Area {
     /**
      * @return the HoraIn
      */
-    public Date getHoraIn() {
+    public String getHoraIn() {
         return HoraIn;
     }
 
     /**
      * @param HoraIn the HoraIn to set
      */
-    public void setHoraIn(Date HoraIn) {
+    public void setHoraIn(String HoraIn) {
         this.HoraIn = HoraIn;
     }
 
     /**
      * @return the HoraOut
      */
-    public Date getHoraOut() {
+    public String getHoraOut() {
         return HoraOut;
     }
 
     /**
      * @param HoraOut the HoraOut to set
      */
-    public void setHoraOut(Date HoraOut) {
+    public void setHoraOut(String HoraOut) {
         this.HoraOut = HoraOut;
     }
+
+    /**
+     * @return the HoraIn
+     */
+//    public Date getHoraIn() {
+//        return HoraIn;
+//    }
+//
+//    /**
+//     * @param HoraIn the HoraIn to set
+//     */
+//    public void setHoraIn(Date HoraIn) {
+//        this.HoraIn = HoraIn;
+//    }
+//
+//    /**
+//     * @return the HoraOut
+//     */
+//    public Date getHoraOut() {
+//        return HoraOut;
+//    }
+//
+//    /**
+//     * @param HoraOut the HoraOut to set
+//     */
+//    public void setHoraOut(Date HoraOut) {
+//        this.HoraOut = HoraOut;
+//    }
 }

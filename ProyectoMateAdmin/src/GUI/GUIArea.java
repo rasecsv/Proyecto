@@ -128,8 +128,8 @@ public class GUIArea extends javax.swing.JFrame {
         
         area.setNombre(txtNombre.getText());
         
-        area.setHoraIn(Date.valueOf(txtEntrada.toString()));
-        area.setHoraOut(Date.valueOf(txtHoraSalida.toString()));
+        area.setHoraIn(txtEntrada.getText());
+        area.setHoraOut(txtHoraSalida.getText());
         
         
         

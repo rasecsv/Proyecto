@@ -13,6 +13,10 @@ public class Administrador {
     private String id;
     private String ususario;
     private String contraseña;
+    
+    public Administrador(){
+        
+    }
 
     public Administrador(String id, String ususario, String contraseña) {
         this.id = id;
