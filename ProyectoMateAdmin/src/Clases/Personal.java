@@ -10,95 +10,35 @@ package Clases;
  * @author HOLA
  */
 public class Personal {
-    private int idPersona;
+        private int idPersona;
 	private String nombre;
 	private String apellidos;
 	private int dni;
 	private String ruc;
-        private String cargo;
+        private boolean cargo;//true si es admin
         private int idArea;
-	private boolean permisosAdmin; //true si es admin
+	private int permisosAdmin; 
 	
         public Personal(){
             
         }
 	
-        public void Personal(String nombre , String apellidos , int dni, String ruc,String cargo,int idarea,boolean permisosadmin){
+        public void Personal(String nombre , String apellidos , int dni, String ruc,boolean cargo,int idarea,int permisosadmin){
             this.setNombre(nombre);
             this.setApellidos(apellidos);
             this.setDni(dni);
             this.setRuc(ruc);
             this.setCargo(cargo);
-            this.setIdArea(idArea);
+            this.setIdArea(idarea);
             this.setPermisosAdmin(permisosadmin);
             
         }
-	//Setter y getter para el id
-	
-	public int getId()
-	{
-		return idPersona;
-	}
-
-	//Setter y getter para el nombre
-	
-	public String getNombre()
-	{
-		return nombre;
-	}
-	
-	//Setter y getter para apellidos
-	
-	public String getApellidos()
-	{
-		return apellidos;
-	}
-	
-	//Setter y getter para el dni
-	public int getDNI()
-	{
-		return dni;
-	}
-	
-	//Setter y getter para el ruc
-	public String getRuc()
-	{
-		return ruc;
-	}
-	
-	//Setter y getter para el idArea
-	
-	//Setter y getter para los permisos de admin
-	public boolean getPermisos()
-	{
-		return permisosAdmin;
-	}
-	
-	/*
-	//entrada de usuario
-	public void marcaEntrada(){
-		this.entrada = true;
-		Fecha horaEntrada = new Fecha();
-		this.registroEntrada = horaEntrada;
-	}
-	
-	//salida de usuario
-	public void marcaSalida() {
-		Fecha horaSalida = new Fecha();
-		this.registroEntrada = horaSalida;
-		this.entrada = false;
-	}
-*/
 
     /**
-    // * @param cargo the cargo to set
-//
-     * @return  */
-//    public void setCargo(String cargo) {
-//        this.cargo = cargo;
-//    }
-    public String getCargo(){
-        return cargo;
+     * @return the idPersona
+     */
+    public int getIdPersona() {
+        return idPersona;
     }
 
     /**
@@ -109,10 +49,24 @@ public class Personal {
     }
 
     /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
      * @param nombre the nombre to set
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the apellidos
+     */
+    public String getApellidos() {
+        return apellidos;
     }
 
     /**
@@ -123,10 +77,24 @@ public class Personal {
     }
 
     /**
+     * @return the dni
+     */
+    public int getDni() {
+        return dni;
+    }
+
+    /**
      * @param dni the dni to set
      */
     public void setDni(int dni) {
         this.dni = dni;
+    }
+
+    /**
+     * @return the ruc
+     */
+    public String getRuc() {
+        return ruc;
     }
 
     /**
@@ -137,17 +105,17 @@ public class Personal {
     }
 
     /**
-     * @param cargo the cargo to set
+     * @return the cargo
      */
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public boolean isCargo() {
+        return cargo;
     }
 
     /**
-     * @param permisosAdmin the permisosAdmin to set
+     * @param cargo the cargo to set
      */
-    public void setPermisosAdmin(boolean permisosAdmin) {
-        this.permisosAdmin = permisosAdmin;
+    public void setCargo(boolean cargo) {
+        this.cargo = cargo;
     }
 
     /**
@@ -164,7 +132,18 @@ public class Personal {
         this.idArea = idArea;
     }
 
-    public void setText(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * @return the permisosAdmin
+     */
+    public int getPermisosAdmin() {
+        return permisosAdmin;
     }
+
+    /**
+     * @param permisosAdmin the permisosAdmin to set
+     */
+    public void setPermisosAdmin(int permisosAdmin) {
+        this.permisosAdmin = permisosAdmin;
+    }
+	
 }

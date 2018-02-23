@@ -23,7 +23,7 @@ public class AgregarPersonal {
      
            
     public boolean registrar(Personal persona){
-        sSQL = "INSERT into bdproyectomate.persona(nombre,apellido,dni,ruc,cargo) VALUES (?,?,?,?,?)";
+        sSQL = "INSERT into bdproyectomate.personal(Nombre,DNI,RUC,Area_idArea,Cargo,Admin_idAdmin,apellidos) VALUES (?,?,?,?,?,?,?)";
       //  sSQL2 = "SELECT * FROM bdproyectomate.area";
         try{
             PreparedStatement pst = cn.prepareStatement(sSQL);
@@ -32,15 +32,12 @@ public class AgregarPersonal {
             int cont=0;
             pst.setString(1, persona.getNombre());
             pst.setString(7, persona.getApellidos());
-            pst.setInt(2, persona.getDNI());
+            pst.setInt(2, persona.getDni());
             pst.setString(3, persona.getRuc());
-            pst.setString(5, persona.getCargo());
+            pst.setInt(6, persona.getPermisosAdmin());
             
-            if((persona.getCargo()).equals("Administrador")){
-                pst.setBoolean(6, true);
-            }else{
-                pst.setBoolean(6, false);
-            }
+            pst.setBoolean(5, persona.isCargo());
+            
             
           pst.setInt(4, persona.getIdArea());
             int n = pst.executeUpdate();

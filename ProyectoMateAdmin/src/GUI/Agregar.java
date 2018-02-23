@@ -8,12 +8,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class Agregar extends javax.swing.JFrame {
-    private final String accion = "agregar";
+    private final String accion = "guardar";
     private DefaultComboBoxModel modelocombo;
     ConectorBD mysql = new ConectorBD();
      Connection cn= mysql.Conectar();
@@ -21,9 +22,16 @@ public class Agregar extends javax.swing.JFrame {
     public Agregar() {
         modelocombo = new DefaultComboBoxModel(new String[]{});
         initComponents();
+      //  seleccionar();
         llenarCombo();
     }
 
+    public void seleccionar(){
+        Area nuevo = new Area();
+        nuevo = (Area) CombArea.getSelectedItem();
+        int id = nuevo.getID();
+       
+    }
     public void llenarCombo(){
        Area area =new Area();
        String nombre= null;
@@ -216,16 +224,28 @@ public class Agregar extends javax.swing.JFrame {
     
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+         String sql="SELECT idArea,Nombre FROM bdproyectomate.area";
+        try {
+            PreparedStatement verArea = cn.prepareStatement(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
         Personal persona =new Personal();
+       
         AgregarPersonal agregar = new AgregarPersonal();
-        Area nuevo = (Area) CombArea.getSelectedItem();
-        int id = nuevo.getID();
         persona.setNombre(txtNombre.getText());
         persona.setApellidos(txtApellido.getText());
         persona.setDni(Integer.parseInt(txtDNI.getText()));
         persona.setRuc(txtRUC.getText());
-        persona.setCargo(txtCargo.getText());
-        persona.setIdArea(id);
+     //   persona.setCargo(txtCargo.getText());
+        int i = (int) CombArea.getSelectedIndex();
+        persona.setIdArea(i);
+        if((txtCargo.getText()).equals("empleado")){
+           persona.setCargo(false);
+        }else{
+            persona.setCargo(true);
+        }
         if (accion.equals("guardar")) {
              if (agregar.registrar(persona)){
                  JOptionPane.showMessageDialog(rootPane, "El cliente fue registrado correctamente");
