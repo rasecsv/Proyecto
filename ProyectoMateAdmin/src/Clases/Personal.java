@@ -145,5 +145,6 @@ public class Personal {
     public void setPermisosAdmin(int permisosAdmin) {
         this.permisosAdmin = permisosAdmin;
     }
-	
+
+   	
 }

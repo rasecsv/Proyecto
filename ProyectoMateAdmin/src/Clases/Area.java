@@ -1,6 +1,4 @@
-package Clases;
-
-import java.util.Date;
+    package Clases;
 
 public class Area {
       private int ID;
@@ -11,7 +9,7 @@ public class Area {
     public  Area(){
         
     }
-
+    
     public Area(String nombre , String horaIn, String horaOut){
         this.Nombre = nombre;
         this.HoraIn =horaIn;

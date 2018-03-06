@@ -16,7 +16,7 @@ public class Principal {
      */
     public static void main(String[] args) {
         new LoginAdmin();
-        System.out.println("asdga");
+        //System.out.println("asdga");
     }
     
 }

@@ -53,6 +53,7 @@ public class GestionarArea {
                 pst.setTime(3,ins2);
 
             } catch (ParseException | SQLException e) {
+                System.err.println(e);
             }
             
             //falta validar la entrada de hora incorrecta
