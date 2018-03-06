@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -87,15 +88,21 @@ public class AgregarPersonal {
        return id;     
    }
 
-    public boolean eliminar(Personal persona) throws Exception {
+    public boolean eliminar(Integer dni,Personal persona) throws Exception {
+       int id= ID(dni);
         boolean rpta = false;
         
         try {
             if(persona!=null){
-                  sSQL="delete from bdproyectomate.personal where idPersonal= ?";
-                  pst = cn.prepareStatement(sSQL);
+                  sSQL="delete from bdproyectomate.personal where idPersonal= "+id;
+                  Statement st = cn.createStatement();
 //                 pst.setInt(1, persona.getIdPersona());
-                 rpta =pst.executeUpdate()== 1;
+                 int confirmar = st.executeUpdate(sSQL);
+                 if(confirmar==1){
+                          rpta=true;
+                 }else{
+                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el personal correctamente");
+                 }
             }
            
         } catch (Exception e) {
@@ -113,51 +120,46 @@ public class AgregarPersonal {
         
     }
     
-     public boolean actualizar(Integer dni,Personal persona){
-        
-          System.out.println("entre o no entre");
-        
-         sSQL = "update  bdproyectomate.personal set RUC =?, Cargo= ?, Area_idArea= ?"+" where DNI= ?"+dni;
-         System.out.println("pase");
-         try {
-             System.out.println("aqui tbmn");
-             pst = cn.prepareStatement(sSQL);
-             System.out.println("conecto");
-             try {
-                 pst.setString(4,persona.getRuc());
-                 
-                 
-             } catch (Exception e) {
-             }
-             
-            // pst.setInt(1 ,val);
-             //pst.executeUpdate();
-               
     
-         }catch(Exception e){
-             
-         }
-         return true;
-     }
-  public void updateSalida(Integer dni,Personal persona) {
+  public boolean updateSalida(Integer dni,Personal persona) {
         int id=ID(dni);
-        String UPDATE = "UPDATE personal SET Nombre= ?,apellidos=?,RUC=?,DNI=?,Area_idArea=?, Cargo=? WHERE idPersonal=?";
-        
+        System.out.println("hola :" +dni);
+        boolean val=false;
+        String UPDATE = "UPDATE bdproyectomate.personal SET Nombre= ?,DNI= ? , RUC=?  , Area_idArea=?, Cargo=? ,ADMIN_idAdmin=? ,apellidos=?" + " WHERE idPersonal= " +id+ "";
+       // String UPDATE ="UPDATE bdproyectomate.personal  set Area_idArea=a.idArea from bdproyectomate.personal p JOIN bdproyectomate.area a where Area_idArea=? AND idPersonal= "+id+"";
+      //    UPDATE producto SET id_categoria = cat.id_categoria  FROM  producto prod JOIN categrias cat ON   cat.clave_marca = prod.clave_marca
         try {
+            System.out.println("hola que hace");
            pst = cn.prepareStatement(UPDATE);
+          
             pst.setString(1, persona.getNombre());
-            pst.setString(2, persona.getApellidos());
+            System.out.println(persona.getNombre());
+            pst.setInt(2, persona.getDni());
+            System.out.println(persona.getDni());
             pst.setString(3, persona.getRuc());
-            pst.setInt(4, persona.getDni());
-            pst.setInt(5, persona.getIdArea());
-            pst.setBoolean(6, persona.isCargo());
-            pst.setInt(7, id);
+            System.out.println(persona.getRuc());            
+            pst.setInt(4, persona.getIdArea());
+            System.out.println(persona.getIdArea());
+            pst.setInt(6, persona.getPermisosAdmin());
+            System.out.println(persona.getPermisosAdmin());
+            pst.setBoolean(5, persona.isCargo());
+            System.out.println(persona.isCargo());
+            pst.setString(7, persona.getApellidos());
+            System.out.println(persona.getApellidos());
+           // pst.setInt(0, id);
+            System.out.println("llegue aqui :v");
             pst.executeUpdate();
-            pst.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("pase :(");
+            return true;
+           // pst.close();
+            
+        } catch (SQLException | HeadlessException e) {
+            System.out.println(e);
+               //JOptionPane.showConfirmDialog(null, e);
+            System.out.println("pos no entre ");
+            return false;
         }
-
+ 
     }
 
 }

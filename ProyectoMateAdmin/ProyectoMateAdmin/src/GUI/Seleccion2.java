@@ -33,7 +33,7 @@ public class Seleccion2 extends javax.swing.JFrame {
     /**
      * Creates new form Seleccion2
      */
-    private final String accion = "agregar";
+    private String accion = "agregar";
     private DefaultComboBoxModel modelocombo;
    
     DefaultTableModel modelotabla;
@@ -77,7 +77,7 @@ public class Seleccion2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanelSlider1 = new diu.swe.habib.JPanelSlider.JPanelSlider();
         panelmodificar = new javax.swing.JPanel();
-        rSMaterialButtonRectangle6 = new rojerusan.RSMaterialButtonRectangle();
+        btnModPersonal = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle7 = new rojerusan.RSMaterialButtonRectangle();
         txtBusNomb = new javax.swing.JTextField();
         btnBMod = new javax.swing.JButton();
@@ -201,7 +201,12 @@ public class Seleccion2 extends javax.swing.JFrame {
 
         panelmodificar.setBackground(new java.awt.Color(255, 255, 255));
 
-        rSMaterialButtonRectangle6.setText("Modificar");
+        btnModPersonal.setText("Modificar");
+        btnModPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModPersonalActionPerformed(evt);
+            }
+        });
 
         rSMaterialButtonRectangle7.setText("Cancelar");
 
@@ -224,13 +229,19 @@ public class Seleccion2 extends javax.swing.JFrame {
 
         jLabel19.setText("Cargo");
 
+        txtModCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModCargoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelmodificarLayout = new javax.swing.GroupLayout(panelmodificar);
         panelmodificar.setLayout(panelmodificarLayout);
         panelmodificarLayout.setHorizontalGroup(
             panelmodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelmodificarLayout.createSequentialGroup()
                 .addContainerGap(204, Short.MAX_VALUE)
-                .addComponent(rSMaterialButtonRectangle6, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnModPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addComponent(rSMaterialButtonRectangle7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119))
@@ -275,7 +286,7 @@ public class Seleccion2 extends javax.swing.JFrame {
                 .addComponent(txtModArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(106, 106, 106)
                 .addGroup(panelmodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rSMaterialButtonRectangle6, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSMaterialButtonRectangle7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
             .addGroup(panelmodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -638,25 +649,29 @@ public class Seleccion2 extends javax.swing.JFrame {
                    nomb=rs.getString("Nombre");
                     System.out.println(nomb);
                   d=rs.getInt("DNI");
-                  String dn = Integer.toString(d); 
-                 ruc=rs.getInt("RUC");
-                String ru = Integer.toString(ruc);
-                 are=rs.getInt("idArea");                 
+                  String dn = Integer.toString(d);
+                    System.out.println("dni"+dn);
+                 String ru=rs.getString("RUC");
+                    System.out.println("ruc"+ru);
+                //String ru = Integer.toString(ruc);
+                 are=rs.getInt("Area_idArea"); 
+                    System.out.println("area:" + are);
                  cargo=rs.getInt("Cargo");
                   if(cargo == 0){
                       c="Empleado";
                   }else{
                       c="Administrador";
                   }
+                    System.out.println("cargo :"+c);
                  apellido=rs.getString("apellidos");
-                    System.out.println(apellido);
+                    System.out.println("apellidos:" +   apellido);
 ////                  String a = area.getNombre();                
                 //  p=rs.getString(a);             
                 lblNombre.setText(nomb);
                 lblApellido.setText(apellido);
         
                 lblDNI.setText(dn);
-                lblRUC.setText(Integer.toString(ruc));
+                lblRUC.setText(ru);
               lblArea.setText(Integer.toString(are));
                  lblCargo.setText(c);
                 }
@@ -672,47 +687,145 @@ public class Seleccion2 extends javax.swing.JFrame {
 
     private void btnEliminarPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPersonalActionPerformed
         // TODO add your handling code here:
-        int id=0;
-        String sql = "delete from bdproyectomate.personal where idPersonal = "+id+"";
+        
+         String nombre = txtBusquedaDNI.getText();
+        int id = Integer.parseInt(nombre);
+        if(id > 0){
+            //System.out.println("encontro algo");
+            //   JOptionPane.showConfirmDialog(null, "¿Desea eliminar este Area?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int resp=JOptionPane.showConfirmDialog(null,"¿Desea eliminar el Area seleccionada?");
+            if (JOptionPane.OK_OPTION == resp){
+               
+                try {
+                    if(agregar.eliminar(id, persona)== true ){
+                        
+                        JOptionPane.showMessageDialog(null,"Se elimino el Area con exito");
+                        
+                    }else{
+                        JOptionPane.showMessageDialog(null,"No se ha podido eliminar el Area");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Seleccion2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            } else{
+                JOptionPane.showMessageDialog(null, "No selecciono una opción afirmativa");
+                             
+            }
+
+        }else{
+            System.out.println("no hay nada ");
+        }
+
+
         
             
     }//GEN-LAST:event_btnEliminarPersonalActionPerformed
 
-//     void CargarTabla(String nombre){      
-//        String[] titulos= {"ID","Nombre","Apellido","DNI","RUC","Cargo","Area"};
-//        String[] registro = new String[7];
-//        String sSQL="";
-//        modelotabla=new DefaultTableModel (null,titulos);
-//        
-//        sSQL="SELECT * FROM bdproyectomate.personal "
-//                + "WHERE CONCAT(apellidos, ' ',Nombre, ' ') LIKE '%"+nombre+"%'";
-//         try {
-//        Statement st=cn.createStatement();
-//         rs=st.executeQuery(sSQL);
-//        while(rs.next()){
-//            registro[0]=rs.getString("id");
-//            registro[1]=rs.getString("Nombre");
-//            registro[2]=rs.getString("apellidos");
-//            registro[3]=rs.getString("DNI");
-//            registro[4]=rs.getString("RUC");
-//            registro[5]=rs.getString("Cargo");
-//            registro[6]=rs.getString("Area_idArea");
-//            modelotabla.addRow(registro);
-//        }
-//        tabla.setModel(modelotabla);
-//    } catch (SQLException ex) {
-//       JOptionPane.showMessageDialog(null, ex);
-//    }
-//        
-//   }
+
     private void btnBModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBModActionPerformed
 
         // TODO add your handling code here:
         String buscar = txtBusNomb.getText();
         int dni = Integer.parseInt(buscar);
+       
+        String nomb=null,apellido=null;
+        int are=0,cargo,ruc=0,d;
+       String c =null,ar=null,p=null;
+        String sSQL="select * from bdproyectomate.personal where DNI= "+dni;
+        try {
+            pst =cn.prepareStatement(sSQL);
+            rs =pst.executeQuery();
+            while(rs.next()){
+                if(rs != null){
+                   nomb=rs.getString("Nombre");
+                    System.out.println(nomb);
+                  d=rs.getInt("DNI");
+                  String dn = Integer.toString(d);
+                    System.out.println("dni"+dn);
+                 String ru=rs.getString("RUC");
+                    System.out.println("ruc"+ru);
+                //String ru = Integer.toString(ruc);
+                 are=rs.getInt("Area_idArea"); 
+                    System.out.println("area:" + are);
+                 cargo=rs.getInt("Cargo");
+                  if(cargo == 0){
+                      c="Empleado";
+                  }else{
+                      c="Administrador";
+                  }
+                    System.out.println("cargo :"+c);
+                 apellido=rs.getString("apellidos");
+                    System.out.println("apellidos:" +   apellido);
+////                  String a = area.getNombre();                
+                //  p=rs.getString(a);             
+                txtModNombre.setText(nomb);
+                txtModApellido.setText(apellido);
+        
+                txtMoDNI.setText(dn);
+                txtModRUC.setText(ru);
+                txtModArea.setText(Integer.toString(are));
+              txtModCargo.setText(c);
+                }
+                if(rs == null){                    
+                    }
+                pst.close();
+            }    
+         } catch (SQLException | HeadlessException e) {
+             System.out.println(e);
+         }         
+        
         
 
     }//GEN-LAST:event_btnBModActionPerformed
+
+    private void btnModPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModPersonalActionPerformed
+        // TODO add your handling code here:
+     String buscar = txtBusNomb.getText();
+       int dni = Integer.parseInt(buscar);
+        
+        persona.setNombre(txtModNombre.getText());
+       persona.setApellidos( txtModApellido.getText());
+        String d = txtMoDNI.getText();
+        int dn = Integer.parseInt(d);
+        persona.setDni(dn);
+        persona.setRuc(txtModRUC.getText());
+//       String a = txtModArea.getText();
+//       int ar=Integer.parseInt(a);
+       persona.setIdArea(Integer.parseInt(txtModArea.getText()));
+       persona.setPermisosAdmin(1);
+       if((txtModCargo.getText()).equals("empleado") ||(txtModCargo.getText()).equals("Empleado") ){
+           persona.setCargo(false);
+        }else{
+            persona.setCargo(true);
+        }
+        
+//        
+////        //        
+////        
+        accion="Modificar";
+        System.out.println("error 1");
+         if (accion.equals("Modificar")) {
+            System.out.println("error 2");
+            if (agregar.updateSalida(dni, persona)) {
+                System.out.println("error 3");
+                JOptionPane.showMessageDialog(rootPane, "EL personal   pudo ser modificada correctamente");
+            }else{
+                 JOptionPane.showMessageDialog(rootPane, "No se pudo modificar al personal");
+                 System.out.println("error 5");
+            }
+        } else{
+             JOptionPane.showMessageDialog(rootPane, "No se puede acceder al personal ");
+             System.out.println("error 5");
+         }
+
+        
+    }//GEN-LAST:event_btnModPersonalActionPerformed
+
+    private void txtModCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtModCargoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -756,6 +869,7 @@ public class Seleccion2 extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarEliminar;
     private rojerusan.RSMaterialButtonRectangle btnCancelar;
     private rojerusan.RSMaterialButtonRectangle btnEliminarPersonal;
+    private rojerusan.RSMaterialButtonRectangle btnModPersonal;
     private javax.swing.JButton btonagregar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
@@ -793,7 +907,6 @@ public class Seleccion2 extends javax.swing.JFrame {
     private javax.swing.JPanel paneleliminar;
     private javax.swing.JPanel panelmodificar;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle6;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle7;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBusNomb;

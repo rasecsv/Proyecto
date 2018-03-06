@@ -185,7 +185,6 @@ public class GestionarArea {
        
         int val= ID(nombre);
          System.out.println(nombre);
-       // System.out.println(val);
           System.out.println("entre o no entre");
         
          sSQL = "update  bdproyectomate.area set  Nombre= ?, HoraEntrada= ?, HoraSalida= ?"+" where idArea = "+val+"";
@@ -201,28 +200,24 @@ public class GestionarArea {
             java.sql.Time ins1=null;
             java.sql.Time ins2 =null;
         
-               try {
-         //          System.out.println(nombre);
-                   
+        try {
                  pst.setString(1,area.getNombre());   
                 fecha = dt.parse(area.getHoraIn());
                // ins1 = new java.sql.Date(fecha.getTime());
                 ins1=new java.sql.Time(fecha.getTime());
-                pst.setTime(2,ins1);  
-                
-            } catch (ParseException | SQLException e) {
+                pst.setTime(2,ins1);                  
+        } catch (ParseException | SQLException e) {
                 JOptionPane.showMessageDialog(null,"Ingrese una hora correcta");
-            }
-            try {
+        }
+        try {
                 fecha2 =dt.parse(area.getHoraOut());
                 ins2 = new java.sql.Time(fecha2.getTime());
                 pst.setTime(3,ins2);
 
-            } catch (ParseException | SQLException e) {
+        } catch (ParseException | SQLException e) {
                  JOptionPane.showMessageDialog(null,"Ingrese una hora correcta");
-            }
-           
-              pst.executeUpdate();
+        }
+             pst.executeUpdate();
              return true;
         } catch (SQLException | HeadlessException e) {
             JOptionPane.showConfirmDialog(null, e);
