@@ -28,7 +28,7 @@ public class GestionarArea {
          PreparedStatement pst=null;
           ResultSet rs =null;
     public boolean registar(Area area){
-     //funcion para registrar el area en la base de datos
+     
         
         sSQL ="INSERT into bdproyectomate.area(Nombre,HoraEntrada,HoraSalida) VALUES (?,?,?)";
         try{
@@ -104,7 +104,7 @@ public class GestionarArea {
            return dat;
         }
    public void asignar(String nombre){
-       
+       //esta funcion aun no se lo que hace XD
        String nomb;
        String hin;
        String hout;
@@ -122,7 +122,7 @@ public class GestionarArea {
        
    }
    public int ID(String nombre){
-       //funcion para obtener el id del area a traves de la busqueda dle nombre
+ //funcion para obtener el id del area a traves de la busqueda dle nombre       
    int id=0;
     sSQL="SELECT * FROM bdproyectomate.area where Nombre= ?" ;
         try {
@@ -152,7 +152,7 @@ public class GestionarArea {
         //String nombre;
         int cont =ID(nombre);
        sSQL="Delete FROM bdproyectomate.area where idArea= "+cont;
-        
+        //en el script se considera el ID del area para eliminar
        // Area dependencia = new Area ();
     try {
         Statement pst =cn.createStatement();
@@ -184,18 +184,22 @@ public class GestionarArea {
     public boolean actualizar(String nombre,Area area){
        
         int val= ID(nombre);
-   
+         System.out.println(nombre);
+          System.out.println("entre o no entre");
+//script para realizar la actualizacion del area se utilizara el id del area para la actualizacion         
          sSQL = "update  bdproyectomate.area set  Nombre= ?, HoraEntrada= ?, HoraSalida= ?"+" where idArea = "+val+"";
-                try {
-         
+         System.out.println("pase");
+         try {
+             System.out.println("aqui tbmn");
              pst = cn.prepareStatement(sSQL);
+             System.out.println("conecto");
+             System.out.println("hola aqui toy");
             DateFormat dt = new SimpleDateFormat("hh:mm:ss");
             java.util.Date fecha =null;
             java.util.Date fecha2 =null;
             java.sql.Time ins1=null;
             java.sql.Time ins2 =null;
-//metodo para validar el registro dela fecha
-            
+//metodo para validar el registro dela fecha        
         try {
                  pst.setString(1,area.getNombre());   
                 fecha = dt.parse(area.getHoraIn());

@@ -31,7 +31,7 @@ public class AgregarPersonal {
        PreparedStatement pst=null;
        ResultSet rs =null;
     Personal persona = new Personal();
-//metodo para registrar el personal     
+    //metodo para registrar el personal
     public boolean registrar(Personal persona){
         sSQL = "INSERT into bdproyectomate.personal(Nombre,DNI,RUC,Area_idArea,Cargo,ADMIN_idAdmin,apellidos) VALUES (?,?,?,?,?,?,?)";
         try{
@@ -59,12 +59,9 @@ public class AgregarPersonal {
         }
          
     }
-    //funcion de busqueda del ID del personal mediante el ingreso del DNI
-     public int ID(Integer dni){
-       
-   int id=0;
-    //      System.out.println(dni);
-   //query de busqueda por dni
+     //funcion de busqueda del ID del personal mediante el ingreso del DNI
+     public int ID(Integer dni){ 
+    int id=0;     
     sSQL="SELECT * FROM bdproyectomate.personal where DNI= "+dni ;
         try {
             pst =cn.prepareStatement(sSQL);
@@ -89,11 +86,9 @@ public class AgregarPersonal {
       //  System.out.println(id);
        return id;     
    }
-
-     //metodo para eliminar  el personal se pasan el parametro de busqueda dni y el constructor en la clase personal
+  //metodo para eliminar  el personal se pasan el parametro de busqueda dni y el constructor en la clase personal
     public boolean eliminar(Integer dni,Personal persona) throws Exception {
-       int id= ID(dni); 
-       //se realiza asigna el valor  obtenido de la funcion ID 
+       int id= ID(dni);
         boolean rpta = false;
         
         try {
@@ -127,24 +122,24 @@ public class AgregarPersonal {
    //funcion para actualizar el personal  
   public boolean updateSalida(Integer dni,Personal persona) {
         int id=ID(dni);
-        //System.out.println("hola :" +dni);
+       // System.out.println("hola :" +dni);
         boolean val=false;
         //script para realizar el envio de los datos  aun no se por que no ejecutaba antes pero ahora si lo hace :v
         String UPDATE = "UPDATE bdproyectomate.personal SET Nombre= ?,DNI= ? , RUC=?  , Area_idArea=?, Cargo=? ,ADMIN_idAdmin=? ,apellidos=?" + " WHERE idPersonal= " +id+ "";
        // String UPDATE ="UPDATE bdproyectomate.personal  set Area_idArea=a.idArea from bdproyectomate.personal p JOIN bdproyectomate.area a where Area_idArea=? AND idPersonal= "+id+"";
       //    UPDATE producto SET id_categoria = cat.id_categoria  FROM  producto prod JOIN categrias cat ON   cat.clave_marca = prod.clave_marca
         try {
-           // System.out.println("hola que hace");
+            System.out.println("hola que hace");
            pst = cn.prepareStatement(UPDATE);
           
             pst.setString(1, persona.getNombre());
-           // System.out.println(persona.getNombre());
+         //   System.out.println(persona.getNombre());
             pst.setInt(2, persona.getDni());
-          //  System.out.println(persona.getDni());
+         //   System.out.println(persona.getDni());
             pst.setString(3, persona.getRuc());
-          //  System.out.println(persona.getRuc());            
+         //   System.out.println(persona.getRuc());            
             pst.setInt(4, persona.getIdArea());
-         //   System.out.println(persona.getIdArea());
+        //    System.out.println(persona.getIdArea());
             pst.setInt(6, persona.getPermisosAdmin());
         //    System.out.println(persona.getPermisosAdmin());
             pst.setBoolean(5, persona.isCargo());
@@ -161,10 +156,10 @@ public class AgregarPersonal {
         } catch (SQLException | HeadlessException e) {
             System.out.println(e);
                //JOptionPane.showConfirmDialog(null, e);
-          //  System.out.println("pos no entre ");
+            System.out.println("pos no entre ");
             return false;
         }
- 
+ //las impresiones en consola se utilizo para evaluar en que punto ocurria un error
     }
 
 }

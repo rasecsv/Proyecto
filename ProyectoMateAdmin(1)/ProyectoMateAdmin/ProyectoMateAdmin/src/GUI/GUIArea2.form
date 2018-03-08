@@ -42,8 +42,8 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jPanelSlider1" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -203,7 +203,7 @@
                                   <Component id="btnGuardarArea" min="-2" pref="139" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="238" max="32767" attributes="0"/>
+                          <EmptySpace pref="244" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -227,7 +227,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                           <Component id="btnGuardarArea" min="-2" pref="44" max="-2" attributes="0"/>
-                          <EmptySpace pref="229" max="32767" attributes="0"/>
+                          <EmptySpace pref="234" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -280,7 +280,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace pref="177" max="32767" attributes="0"/>
+                          <EmptySpace pref="183" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -342,7 +342,7 @@
                               <Component id="btnModificar" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                               <Component id="rSMaterialButtonRectangle3" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="152" max="32767" attributes="0"/>
+                          <EmptySpace pref="157" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -409,7 +409,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                                   <Component id="btnEliminarA" min="-2" pref="135" max="-2" attributes="0"/>
-                                  <EmptySpace pref="101" max="32767" attributes="0"/>
+                                  <EmptySpace pref="107" max="32767" attributes="0"/>
                                   <Component id="rSMaterialButtonRectangle5" min="-2" pref="130" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
@@ -468,7 +468,7 @@
                               <Component id="btnEliminarA" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                               <Component id="rSMaterialButtonRectangle5" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="154" max="32767" attributes="0"/>
+                          <EmptySpace pref="159" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

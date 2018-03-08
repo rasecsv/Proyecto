@@ -52,7 +52,6 @@ public class Estados {
     public String toString(){
         return this.nombre;
     }
-    //metodo para llenar el combo boc jalando los datos  registrados en la tabla area
     public Vector<Estados> mostrarEstados(){
          Area area =new Area();
        String nombre= null;

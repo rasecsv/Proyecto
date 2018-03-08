@@ -37,7 +37,7 @@ public class GUIArea2 extends javax.swing.JFrame {
        
     public GUIArea2() {
         initComponents();
-        this.setLocationRelativeTo(null);
+       // this.setLocationRelativeTo(null);
     }
 
     /**
@@ -197,7 +197,7 @@ public class GUIArea2 extends javax.swing.JFrame {
                     .addGroup(areaagregarLayout.createSequentialGroup()
                         .addGap(213, 213, 213)
                         .addComponent(btnGuardarArea, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         areaagregarLayout.setVerticalGroup(
             areaagregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +216,7 @@ public class GUIArea2 extends javax.swing.JFrame {
                     .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84)
                 .addComponent(btnGuardarArea, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         jPanelSlider1.add(areaagregar, "card2");
@@ -250,7 +250,7 @@ public class GUIArea2 extends javax.swing.JFrame {
         areamodificarLayout.setHorizontalGroup(
             areamodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(areamodificarLayout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
+                .addContainerGap(183, Short.MAX_VALUE)
                 .addGroup(areamodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, areamodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(areamodificarLayout.createSequentialGroup()
@@ -298,7 +298,7 @@ public class GUIArea2 extends javax.swing.JFrame {
                 .addGroup(areamodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSMaterialButtonRectangle3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         jPanelSlider1.add(areamodificar, "card3");
@@ -334,7 +334,7 @@ public class GUIArea2 extends javax.swing.JFrame {
                     .addGroup(areaeliminarLayout.createSequentialGroup()
                         .addGap(152, 152, 152)
                         .addComponent(btnEliminarA, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                         .addComponent(rSMaterialButtonRectangle5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(areaeliminarLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
@@ -379,7 +379,7 @@ public class GUIArea2 extends javax.swing.JFrame {
                 .addGroup(areaeliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminarA, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSMaterialButtonRectangle5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         jPanelSlider1.add(areaeliminar, "card4");
@@ -389,7 +389,7 @@ public class GUIArea2 extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

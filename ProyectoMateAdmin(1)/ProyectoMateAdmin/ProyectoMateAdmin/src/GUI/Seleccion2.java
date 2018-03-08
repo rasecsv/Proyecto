@@ -36,7 +36,7 @@ public class Seleccion2 extends javax.swing.JFrame {
     private String accion = "agregar";
     private DefaultComboBoxModel modelocombo;
    
-
+    DefaultTableModel modelotabla;
     Area area = new Area();
     Personal persona = new Personal();       
     AgregarPersonal agregar = new AgregarPersonal();  
@@ -45,18 +45,16 @@ public class Seleccion2 extends javax.swing.JFrame {
     PreparedStatement pst=null;
      ResultSet  rs=null;
     public Seleccion2() {
-        
-        modelocombo = new DefaultComboBoxModel(new String[]{});
+         modelocombo = new DefaultComboBoxModel(new String[]{});
 
         initComponents();
         deshabilitar();
         this.setLocationRelativeTo(null);
         jPanelSlider1.nextPanel(1, panelagregar, jPanelSlider1.left);
-      //validaciones
+      
          txtDNI.setDocument(new LimitadorCaracteres(txtDNI,8));
          txtRUC.setDocument(new LimitadorCaracteres(txtRUC,11));
-        //se utilizara la clase estados para llenar el combo box con el cual se seleccionara el area al que pertenece el personal
-         Estados cc = new Estados();
+        Estados cc = new Estados();
         DefaultComboBoxModel modeloEstad = new DefaultComboBoxModel( cc.mostrarEstados());
         CombArea.setModel(modeloEstad);
     }
@@ -80,7 +78,7 @@ public class Seleccion2 extends javax.swing.JFrame {
         jPanelSlider1 = new diu.swe.habib.JPanelSlider.JPanelSlider();
         panelmodificar = new javax.swing.JPanel();
         btnModPersonal = new rojerusan.RSMaterialButtonRectangle();
-        rSMaterialButtonRectangle7 = new rojerusan.RSMaterialButtonRectangle();
+        btnCancelModPersonal = new rojerusan.RSMaterialButtonRectangle();
         txtBusNomb = new javax.swing.JTextField();
         btnBMod = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -105,12 +103,12 @@ public class Seleccion2 extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
+        btnCancelDeletePersonal = new rojerusan.RSMaterialButtonRectangle();
         btnEliminarPersonal = new rojerusan.RSMaterialButtonRectangle();
         lblNombre = new javax.swing.JTextField();
         lblApellido = new javax.swing.JTextField();
-        lblRUC = new javax.swing.JTextField();
         lblDNI = new javax.swing.JTextField();
+        lblRUC = new javax.swing.JTextField();
         lblArea = new javax.swing.JTextField();
         lblCargo = new javax.swing.JTextField();
         panelagregar = new javax.swing.JPanel();
@@ -210,7 +208,12 @@ public class Seleccion2 extends javax.swing.JFrame {
             }
         });
 
-        rSMaterialButtonRectangle7.setText("Cancelar");
+        btnCancelModPersonal.setText("Cancelar");
+        btnCancelModPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelModPersonalActionPerformed(evt);
+            }
+        });
 
         btnBMod.setText("Buscar");
         btnBMod.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +248,7 @@ public class Seleccion2 extends javax.swing.JFrame {
                 .addContainerGap(204, Short.MAX_VALUE)
                 .addComponent(btnModPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
-                .addComponent(rSMaterialButtonRectangle7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelModPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119))
             .addGroup(panelmodificarLayout.createSequentialGroup()
                 .addGroup(panelmodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +292,7 @@ public class Seleccion2 extends javax.swing.JFrame {
                 .addGap(106, 106, 106)
                 .addGroup(panelmodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSMaterialButtonRectangle7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancelModPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
             .addGroup(panelmodificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelmodificarLayout.createSequentialGroup()
@@ -346,7 +349,12 @@ public class Seleccion2 extends javax.swing.JFrame {
 
         jLabel7.setText("RUC");
 
-        rSMaterialButtonRectangle3.setText("Cancelar");
+        btnCancelDeletePersonal.setText("Cancelar");
+        btnCancelDeletePersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelDeletePersonalActionPerformed(evt);
+            }
+        });
 
         btnEliminarPersonal.setText("Eliminar");
         btnEliminarPersonal.addActionListener(new java.awt.event.ActionListener() {
@@ -361,7 +369,7 @@ public class Seleccion2 extends javax.swing.JFrame {
             paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneleliminarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rSMaterialButtonRectangle3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelDeletePersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
             .addGroup(paneleliminarLayout.createSequentialGroup()
                 .addGap(88, 88, 88)
@@ -372,15 +380,15 @@ public class Seleccion2 extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addComponent(jLabel13)
                     .addComponent(jLabel7))
-                .addGap(18, 113, Short.MAX_VALUE)
+                .addGap(117, 117, 117)
                 .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblNombre)
                     .addComponent(lblApellido)
                     .addComponent(lblDNI)
                     .addComponent(lblRUC)
                     .addComponent(lblArea)
-                    .addComponent(lblCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-                .addGap(240, 240, 240))
+                    .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(236, Short.MAX_VALUE))
             .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneleliminarLayout.createSequentialGroup()
                     .addGap(128, 128, 128)
@@ -399,35 +407,40 @@ public class Seleccion2 extends javax.swing.JFrame {
         paneleliminarLayout.setVerticalGroup(
             paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneleliminarLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(144, 144, 144)
+                .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneleliminarLayout.createSequentialGroup()
                         .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(paneleliminarLayout.createSequentialGroup()
-                                .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(11, 11, 11)
-                                .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43))
+                            .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(paneleliminarLayout.createSequentialGroup()
+                        .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(paneleliminarLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(34, 34, 34))
                             .addComponent(jLabel14))
                         .addGap(18, 18, 18)
-                        .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(lblDNI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel15)
                         .addGap(18, 18, 18)
-                        .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(lblRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel7)
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel17))
-                    .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(rSMaterialButtonRectangle3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                        .addComponent(jLabel17)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                        .addComponent(btnCancelDeletePersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
             .addGroup(paneleliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneleliminarLayout.createSequentialGroup()
                     .addGap(47, 47, 47)
@@ -591,22 +604,23 @@ public class Seleccion2 extends javax.swing.JFrame {
     
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        //se realizara el registro del personal 
+         
        persona.setNombre(txtNombre.getText());
         persona.setApellidos(txtApellido.getText());
         persona.setDni(Integer.parseInt(txtDNI.getText()));
         persona.setRuc(txtRUC.getText());
-    
+     //   persona.setCargo(txtCargo.getText());
+       // int i = CombArea.getSelectedIndex();
       Estados est = (Estados)CombArea.getSelectedItem();
       int es= est.getId(); 
-     //metodo para seleccionar las opciones del combo box
+     
       if(CombArea.getSelectedIndex()>1 ){
           persona.setIdArea(es);
       }    
      
            
       persona.setPermisosAdmin(1);
-        //funcion para registrar el cargo (se tomaran a consideracion empleado y  administrador)
+        
         if((txtCargo.getText()).equals("empleado") ||(txtCargo.getText()).equals("Empleado") ){
            persona.setCargo(false);
         }else{
@@ -631,13 +645,13 @@ public class Seleccion2 extends javax.swing.JFrame {
     private void btnBuscarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEliminarActionPerformed
         String buscar = txtBusquedaDNI.getText();
         int dni = Integer.parseInt(buscar);
-        //se realiza el parseo debido a que el dato que se desea buscar es un entero
 //        if(agregar.buscar(dni)== true){
 //            System.out.println("se pudo realizar la busqueda");
 //        }else{
 //            System.out.println("nop ");
 //        }
-       
+       int busqdni = agregar.ID(dni);
+       if(busqdni>0){
         String nomb=null,apellido=null;
         int are=0,cargo,ruc=0,d;
        String c =null,ar=null,p=null;
@@ -668,13 +682,13 @@ public class Seleccion2 extends javax.swing.JFrame {
                     System.out.println("apellidos:" +   apellido);
 ////                  String a = area.getNombre();                
                 //  p=rs.getString(a);             
-                    lblNombre.setText(nomb);
-                    lblApellido.setText(apellido);
-                    lblDNI.setText(Integer.toString(d));
-                   lblRUC.setText(ru);
-                      lblArea.setText(Integer.toString(are));
-                     lblCargo.setText(c);
-
+                lblNombre.setText(nomb);
+                lblApellido.setText(apellido);
+        
+                lblDNI.setText(dn);
+                lblRUC.setText(ru);
+              lblArea.setText(Integer.toString(are));
+                 lblCargo.setText(c);
                 }
                 if(rs == null){                    
                     }
@@ -683,8 +697,9 @@ public class Seleccion2 extends javax.swing.JFrame {
          } catch (SQLException | HeadlessException e) {
              System.out.println(e);
          }         
-        
-        
+       }else{
+           JOptionPane.showMessageDialog(null,"El DNI ingresado no se encuentra registrado");
+       }
     }//GEN-LAST:event_btnBuscarEliminarActionPerformed
 
     private void btnEliminarPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPersonalActionPerformed
@@ -731,7 +746,9 @@ public class Seleccion2 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String buscar = txtBusNomb.getText();
         int dni = Integer.parseInt(buscar);
-       
+        int busq = agregar.ID(dni);
+        if(busq >0){
+            habilitar();
         String nomb=null,apellido=null;
         int are=0,cargo,ruc=0,d;
        String c =null,ar=null,p=null;
@@ -777,7 +794,9 @@ public class Seleccion2 extends javax.swing.JFrame {
          } catch (SQLException | HeadlessException e) {
              System.out.println(e);
          }         
-        
+        }else{
+             JOptionPane.showMessageDialog(null,"El personal que busca no ha sido registrado");
+        }
         
 
     }//GEN-LAST:event_btnBModActionPerformed
@@ -786,7 +805,8 @@ public class Seleccion2 extends javax.swing.JFrame {
         // TODO add your handling code here:
      String buscar = txtBusNomb.getText();
        int dni = Integer.parseInt(buscar);
-        
+        int buscado = agregar.ID(dni);
+        if(buscado>0){
         persona.setNombre(txtModNombre.getText());
        persona.setApellidos( txtModApellido.getText());
         String d = txtMoDNI.getText();
@@ -822,12 +842,26 @@ public class Seleccion2 extends javax.swing.JFrame {
              System.out.println("error 5");
          }
 
-        
+        }else{
+            JOptionPane.showMessageDialog(null, "El DNI ingresado no se encuentra registrado");
+        }
     }//GEN-LAST:event_btnModPersonalActionPerformed
 
     private void txtModCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModCargoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModCargoActionPerformed
+
+    private void btnCancelDeletePersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelDeletePersonalActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_btnCancelDeletePersonalActionPerformed
+
+    private void btnCancelModPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelModPersonalActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        deshabilitar();
+        
+    }//GEN-LAST:event_btnCancelModPersonalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -869,6 +903,8 @@ public class Seleccion2 extends javax.swing.JFrame {
     private rojerusan.RSMaterialButtonRectangle btnAgregar;
     private javax.swing.JButton btnBMod;
     private javax.swing.JButton btnBuscarEliminar;
+    private rojerusan.RSMaterialButtonRectangle btnCancelDeletePersonal;
+    private rojerusan.RSMaterialButtonRectangle btnCancelModPersonal;
     private rojerusan.RSMaterialButtonRectangle btnCancelar;
     private rojerusan.RSMaterialButtonRectangle btnEliminarPersonal;
     private rojerusan.RSMaterialButtonRectangle btnModPersonal;
@@ -908,8 +944,6 @@ public class Seleccion2 extends javax.swing.JFrame {
     private javax.swing.JPanel panelagregar;
     private javax.swing.JPanel paneleliminar;
     private javax.swing.JPanel panelmodificar;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle7;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBusNomb;
     private javax.swing.JTextField txtBusquedaDNI;
@@ -925,15 +959,77 @@ public class Seleccion2 extends javax.swing.JFrame {
     private javax.swing.JTextField txtRUC;
     // End of variables declaration//GEN-END:variables
 
-public void habilitar(){
-   
+void habilitar(){
+ txtModNombre.setEnabled(true);
+ txtModApellido.setEnabled(true);
+ txtMoDNI.setEnabled(true);
+ txtModRUC.setEnabled(true);
+ txtModCargo.setEnabled(true);
+ txtModArea.setEnabled(true);
+ txtModNombre.setText("");
+ txtModApellido.setText("");
+ txtMoDNI.setText("");
+ txtModRUC.setText("");
+ txtModCargo.setText("");
+ txtModArea.setText("");
+ 
+ lblNombre.setEnabled(true);
+ lblApellido.setEnabled(true);       
+ lblDNI.setEnabled(true);
+ lblRUC.setEnabled(true);
+ lblArea.setEnabled(true);
+ lblCargo.setEnabled(true);
+
+  lblNombre.setText("");
+ lblApellido.setText("");       
+ lblDNI.setText("");
+ lblRUC.setText("");
+ lblArea.setText("");
+ lblCargo.setText("");
 }
 
-public void deshabilitar(){
-    
+ void deshabilitar(){
+ txtModNombre.setEnabled(false);
+ txtModApellido.setEnabled(false);
+ txtMoDNI.setEnabled(false);
+ txtModRUC.setEnabled(false);
+ txtModCargo.setEnabled(false);
+  txtModArea.setEnabled(false);
+  lblNombre.setEnabled(false);
+ lblApellido.setEnabled(false);       
+ lblDNI.setEnabled(false);
+ lblRUC.setEnabled(false);
+ lblArea.setEnabled(false);
+ lblCargo.setEnabled(false);
+
+  lblNombre.setText("");
+ lblApellido.setText("");       
+ lblDNI.setText("");
+ lblRUC.setText("");
+ lblArea.setText("");
+ lblCargo.setText("");
+ txtModNombre.setText("");
+ txtModApellido.setText("");
+ txtMoDNI.setText("");
+ txtModRUC.setText("");
+ txtModCargo.setText("");
+ txtModArea.setText("");
 }
 public void limpiar(){
-    
+ txtModNombre.setText("");
+ txtModApellido.setText("");
+ txtMoDNI.setText("");
+ txtModRUC.setText("");
+ txtModCargo.setText("");
+ txtModArea.setText("");
+ lblNombre.setText("");
+ lblApellido.setText("");       
+ lblDNI.setText("");
+ lblRUC.setText("");
+ lblArea.setText("");
+ lblCargo.setText("");
+ txtBusquedaDNI.setText("");
+ txtBusNomb.setText("");
 }
 
 }
